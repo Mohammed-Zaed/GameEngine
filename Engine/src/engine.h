@@ -1,6 +1,6 @@
 #pragma once
 
-//Only meant to be used outside Engine by clien applications
+//Only meant to be used outside Engine by client applications
 #include "core/application.h"
 #include "core/log.h"
 

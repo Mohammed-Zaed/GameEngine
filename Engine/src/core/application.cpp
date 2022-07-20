@@ -1,4 +1,7 @@
 #include "application.h"
+#include "events/event.h"
+#include "events/app_event.h"
+#include "core/log.h"
 
 namespace Engine
 {
@@ -14,8 +17,17 @@ namespace Engine
 
 	void Application::run()
 	{
-		std::cout << "In Engine::Application::run" << std::endl;
-		
+		WindowResizeEvent  windowResizeEvent(1280, 720);
+
+		if (windowResizeEvent.isCategory(EventCategory::EVENT_CATEGORY_APPLICATION))
+		{
+			ENGINE_CORE_TRACE(windowResizeEvent);
+		}
+		else
+		{
+			ENGINE_CORE_TRACE("Category didn't match");
+		}
+
 		while (true)
 		{
 

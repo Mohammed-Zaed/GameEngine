@@ -15,6 +15,6 @@ namespace Engine
 		m_coreLogger->set_level(spdlog::level::trace);
 
 		m_clientLogger = spdlog::stdout_color_mt("APP");
-		m_coreLogger->set_level(spdlog::level::trace);
+		m_clientLogger->set_level(spdlog::level::trace);
 	}
 }

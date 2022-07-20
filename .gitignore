@@ -1,2 +1,9 @@
 .vs/ 
-build/
+Engine/Engine.vcxproj
+Engine/Engine.vcxproj.filters
+Engine/Engine.vcxproj.user
+Game Engine.sln
+bin-int/
+bin/
+sandbox/sandbox.vcxproj
+sandbox/sandbox.vcxproj.user
