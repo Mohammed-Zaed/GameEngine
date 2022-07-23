@@ -1,4 +1,5 @@
 #pragma once
+#include "precompiled.h"
 
 #ifdef ENGINE_WINDOWS
 extern Engine::Application* Engine::createApplication();

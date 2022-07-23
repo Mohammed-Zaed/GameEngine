@@ -10,6 +10,5 @@
 	#error Engine supports only windows.
 #endif
 
-#include <iostream>
 
 #define BIT(x) (1 << x)

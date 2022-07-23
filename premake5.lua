@@ -1,4 +1,4 @@
-workspace "Game Engine"
+workspace "Game_Engine"
 	architecture "x64"
 
 	configurations
@@ -8,7 +8,7 @@ workspace "Game Engine"
 		"Dist"
 	}
 
-outputdir ="%{cfg.build}-%{cfg.system}-%{cfg.architecture}"
+outputdir ="%{cfg.build}_%{cfg.system}_%{cfg.architecture}"
 
 project "Engine"
 	location "Engine"
@@ -16,7 +16,7 @@ project "Engine"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -29,6 +29,9 @@ project "Engine"
 		"%{prj.name}/src",
 		"%{prj.name}/external/spdlog/include"
 	}
+
+	pchheader "precompiled.h"
+	pchsource "%{prj.name}/src/precompiled.cpp"
 
 	filter "system:windows"
 		cppdialect "C++17"
@@ -65,7 +68,7 @@ project "sandbox"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{

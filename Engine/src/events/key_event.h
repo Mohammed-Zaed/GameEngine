@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sstream>
+#include "precompiled.h"
 #include "event.h"
 
 namespace Engine

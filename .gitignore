@@ -2,8 +2,8 @@
 Engine/Engine.vcxproj
 Engine/Engine.vcxproj.filters
 Engine/Engine.vcxproj.user
-Game Engine.sln
-bin-int/
+Game_Engine.sln
+bin_int/
 bin/
 sandbox/sandbox.vcxproj
 sandbox/sandbox.vcxproj.user

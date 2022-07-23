@@ -1,12 +1,12 @@
 #pragma once
-#include <memory>
+#include "precompiled.h"
 #include "core.h"
 #include "spdlog/spdlog.h"
 #include "Spdlog/fmt/ostr.h"
 
 namespace Engine
 {
-	class ENGINE_API Log
+	class ENGINE_API Log  
 	{
 	public:
 
