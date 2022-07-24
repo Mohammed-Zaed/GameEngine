@@ -27,7 +27,20 @@ project "Engine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/external/spdlog/include"
+		"%{prj.name}/external/spdlog/include",
+		"%{prj.name}/external/glfw/include"
+	}
+	
+	libdirs
+	{
+		"%{prj.name}/external/glfw/lib-vc2019/"
+	}
+	
+	links
+	{
+		"glfw3",
+		"glfw3dll",
+		"opengl32"
 	}
 
 	pchheader "precompiled.h"
