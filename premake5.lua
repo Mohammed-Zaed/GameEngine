@@ -30,7 +30,8 @@ project "Engine"
 		"%{prj.name}/external/spdlog/include",
 		"%{prj.name}/external/glfw/include"
 	}
-	
+
+
 	libdirs
 	{
 		"%{prj.name}/external/glfw/lib-vc2019/"
@@ -38,7 +39,6 @@ project "Engine"
 	
 	links
 	{
-		"glfw3",
 		"glfw3dll",
 		"opengl32"
 	}
@@ -59,7 +59,8 @@ project "Engine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/sandbox"),
+			("{COPY} ../%{prj.name}/external/glfw/lib-vc2019/ ../bin/%{outputdir}/sandbox")
 		}
 
 	filter "configurations:Debug"
