@@ -1,124 +1,139 @@
 workspace "Game_Engine"
-	architecture "x64"
+    architecture "x64"
 
-	configurations
-	{
-		"Debug",
-		"Release",
-		"Dist"
-	}
+    configurations
+    {
+        "Debug",
+        "Release",
+        "Dist"
+    }
+
+    startproject "sandbox"
 
 outputdir ="%{cfg.build}_%{cfg.system}_%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+includedirpath              = {}
+includedirpath["src"]       = "%{prj.name}/src"
+includedirpath["spdlog"]    = "%{prj.name}/external/spdlog/include"
+includedirpath["GLFW"]      = "%{prj.name}/external/glfw/include"
+
+-- library directories relative to root folder (solution directory)
+librarydirpath              = {}
+librarydirpath["GLFW"]      = "%{prj.name}/external/glfw/lib-vc2019/"
+
 project "Engine"
-	location "Engine"
-	kind "SharedLib"
-	language "C++"
+    location "Engine"
+    kind "SharedLib"
+    language "C++"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
 
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-	}
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp",
+    }
 
-	includedirs
-	{
-		"%{prj.name}/src",
-		"%{prj.name}/external/spdlog/include",
-		"%{prj.name}/external/glfw/include"
-	}
+    includedirs
+    {
+        "%{includedirpath.src}",
+        "%{includedirpath.spdlog}",
+        "%{includedirpath.GLFW}"
+    }
 
 
-	libdirs
-	{
-		"%{prj.name}/external/glfw/lib-vc2019/"
-	}
-	
-	links
-	{
-		"glfw3dll",
-		"opengl32"
-	}
+    libdirs
+    {
+        "%{librarydirpath.GLFW}"
+    }
 
-	pchheader "precompiled.h"
-	pchsource "%{prj.name}/src/precompiled.cpp"
+    links
+    {
+        "glfw3dll",
+        "opengl32"
+    }
 
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "on"
-		systemversion "latest"
+    pchheader "precompiled.h"
+    pchsource "%{prj.name}/src/precompiled.cpp"
 
-		defines
-		{
-			"ENGINE_WINDOWS",
-			"BUILD_DLL"
-		}
+    filter "system:windows"
+        cppdialect "C++17"
+        staticruntime "on"
+        systemversion "latest"
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/sandbox"),
-			("{COPY} ../%{prj.name}/external/glfw/lib-vc2019/ ../bin/%{outputdir}/sandbox")
-		}
+        defines
+        {
+            "ENGINE_WINDOWS",
+            "BUILD_DLL"
+        }
 
-	filter "configurations:Debug"
-		defines "ENGINE_DEBUG"
-		symbols "On"
+        postbuildcommands
+        {
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/sandbox"),
+            ("{COPY} ../%{librarydirpath.GLFW}/ ../bin/%{outputdir}/sandbox")
+        }
 
-	filter "configurations:Release"
-		defines "ENGINE_RELEASE"
-		optimize "On"
+    filter "configurations:Debug"
+        defines "ENGINE_DEBUG"
+        symbols "On"
 
-	filter "configurations:Dist"
-		defines "ENGINE_DIST"
-		optimize "On"
+    filter "configurations:Release"
+        defines "ENGINE_RELEASE"
+        optimize "On"
+
+    filter "configurations:Dist"
+        defines "ENGINE_DIST"
+        optimize "On"
 
 
 project "sandbox"
-	location "sandbox"
-	kind "ConsoleApp"
-	language "C++"
+    location "sandbox"
+    kind "ConsoleApp"
+    language "C++"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
 
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-	}
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp",
+    }
 
-	includedirs
-	{
-		"Engine/external/spdlog/include",
-		"Engine/src"
-	}
+    includedirs
+    {
+        "Engine/external/spdlog/include",
+        "Engine/src"
+    }
 
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "on"
-		systemversion "latest"
 
-		defines
-		{
-			"ENGINE_WINDOWS"
-		}
 
-		links
-		{
-			"Engine"
-		}
+    filter "system:windows"
+        cppdialect "C++17"
+        staticruntime "on"
+        systemversion "latest"
 
-	filter "configurations:Debug"
-		defines "ENGINE_DEBUG"
-		symbols "On"
+        defines
+        {
+            "ENGINE_WINDOWS"
+        }
 
-	filter "configurations:Release"
-		defines "ENGINE_RELEASE"
-		optimize "On"
+        links
+        {
+            "Engine"
+        }
 
-	filter "configurations:Dist"
-		defines "ENGINE_DIST"
-		optimize "On"
+    filter "configurations:Debug"
+        defines "ENGINE_DEBUG"
+        symbols "On"
+
+    filter "configurations:Release"
+        defines "ENGINE_RELEASE"
+        optimize "On"
+
+    filter "configurations:Dist"
+        defines "ENGINE_DIST"
+        optimize "On"
+
