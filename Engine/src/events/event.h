@@ -27,6 +27,7 @@ namespace Engine
 
 	class ENGINE_API Event
 	{
+		friend class EventDispatcher;
 	public:
 		virtual EventType getType() const = 0;
 		virtual const char* getName() const = 0;
@@ -57,9 +58,9 @@ namespace Engine
 		template<typename T>
 		bool dispatch(eventFun<T> func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())
+			if (m_event.getType() == T::getStaticEventType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_event.m_handled = func(*(T*)&m_event);
 				return true;
 			}
 			return false;
