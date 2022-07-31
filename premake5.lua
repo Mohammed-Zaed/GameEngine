@@ -71,7 +71,7 @@ project "Engine"
 
         postbuildcommands
         {
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\""),
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/sandbox/\""),
             ("{COPY} ../%{librarydirpath.GLFW}/ ../bin/%{outputdir}/sandbox")
         }
 
