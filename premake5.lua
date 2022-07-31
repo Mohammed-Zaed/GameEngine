@@ -17,10 +17,13 @@ includedirpath              = {}
 includedirpath["src"]       = "%{prj.name}/src"
 includedirpath["spdlog"]    = "%{prj.name}/external/spdlog/include"
 includedirpath["GLFW"]      = "%{prj.name}/external/glfw/include"
+includedirpath["GLAD"]      = "%{prj.name}/external/glad/include"
 
 -- library directories relative to root folder (solution directory)
 librarydirpath              = {}
 librarydirpath["GLFW"]      = "%{prj.name}/external/glfw/lib-vc2019/"
+
+include "Engine/external/glad"
 
 project "Engine"
     location "Engine"
@@ -40,7 +43,8 @@ project "Engine"
     {
         "%{includedirpath.src}",
         "%{includedirpath.spdlog}",
-        "%{includedirpath.GLFW}"
+        "%{includedirpath.GLFW}",
+        "%{includedirpath.GLAD}"
     }
 
 
@@ -52,7 +56,8 @@ project "Engine"
     links
     {
         "glfw3dll",
-        "opengl32"
+        "opengl32",
+        "Glad"
     }
 
     pchheader "precompiled.h"
@@ -66,7 +71,8 @@ project "Engine"
         defines
         {
             "ENGINE_WINDOWS",
-            "BUILD_DLL"
+            "BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands
@@ -78,17 +84,17 @@ project "Engine"
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
         symbols "On"
-		buildoptions "/MDd"
+        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
         optimize "On"
-		buildoptions "/MD"
+        buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
         optimize "On"
-		buildoptions "/MD"
+        buildoptions "/MD"
 
 
 project "sandbox"
@@ -131,15 +137,14 @@ project "sandbox"
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
         symbols "On"
-		buildoptions "/MDd"
+        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
         optimize "On"
-		buildoptions "/MD"
+        buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
         optimize "On"
-		buildoptions "/MD"
-
+        buildoptions "/MD"

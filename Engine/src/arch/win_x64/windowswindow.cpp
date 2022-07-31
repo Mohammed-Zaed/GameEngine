@@ -5,6 +5,8 @@
 #include "events/key_event.h"
 #include "events/mouse_event.h"
 
+#include "glad/glad.h"
+
 namespace Engine {
 
 	static bool s_GLFWInitialized = false;
@@ -142,6 +144,8 @@ namespace Engine {
 			data.m_eventCallback(event);
 		});
 
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		ENGINE_CORE_ASSERT(status, "Failed to initialise glad");
 	}
 
 	void WindowsWindow::shutdown()
