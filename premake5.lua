@@ -78,14 +78,17 @@ project "Engine"
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
         symbols "On"
+		buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
         optimize "On"
+		buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
         optimize "On"
+		buildoptions "/MD"
 
 
 project "sandbox"
@@ -128,12 +131,15 @@ project "sandbox"
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
         symbols "On"
+		buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
         optimize "On"
+		buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
         optimize "On"
+		buildoptions "/MD"
 

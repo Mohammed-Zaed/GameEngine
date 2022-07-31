@@ -39,7 +39,9 @@ namespace Engine
 			return static_cast<bool>(getCategoryFlag() & static_cast<int>(category));
 		}
 
-	protected:
+		bool isHandled() { return m_handled; }
+
+	private:
 		bool m_handled = false;
 
 	};

@@ -26,6 +26,10 @@ namespace Engine
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : m_layerStack)
+				layer->onUpdate();
+
 			m_window->onUpdate();
 
 		}
@@ -36,6 +40,25 @@ namespace Engine
 		EventDispatcher eventDispatcher(event);
 		eventDispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::onWindowClose, this, std::placeholders::_1));
 		ENGINE_CORE_TRACE("{0}", event);
+
+		for (auto it = m_layerStack.end(); it != m_layerStack.begin(); )
+		{
+			(*--it)->onEvent(event);
+			if (event.isHandled())
+			{
+				break;
+			}
+		}
+	}
+
+	void Application::pushLayer(Layer* layer)
+	{
+		m_layerStack.pushLayer(layer);
+	}
+
+	void Application::pushOverlay(Layer* overlay)
+	{
+		m_layerStack.pushOverlay(overlay);
 	}
 
 	bool Application::onWindowClose(WindowCloseEvent& event)
