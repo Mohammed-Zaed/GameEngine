@@ -18,12 +18,14 @@ includedirpath["src"]       = "%{prj.name}/src"
 includedirpath["spdlog"]    = "%{prj.name}/external/spdlog/include"
 includedirpath["GLFW"]      = "%{prj.name}/external/glfw/include"
 includedirpath["GLAD"]      = "%{prj.name}/external/glad/include"
+includedirpath["IMGUI"]     = "%{prj.name}/external/imgui"
 
 -- library directories relative to root folder (solution directory)
 librarydirpath              = {}
 librarydirpath["GLFW"]      = "%{prj.name}/external/glfw/lib-vc2019/"
 
 include "Engine/external/glad"
+include "Engine/external/imgui"
 
 project "Engine"
     location "Engine"
@@ -44,7 +46,8 @@ project "Engine"
         "%{includedirpath.src}",
         "%{includedirpath.spdlog}",
         "%{includedirpath.GLFW}",
-        "%{includedirpath.GLAD}"
+        "%{includedirpath.GLAD}",
+        "%{includedirpath.IMGUI}"
     }
 
 
@@ -57,7 +60,8 @@ project "Engine"
     {
         "glfw3dll",
         "opengl32",
-        "Glad"
+        "Glad",
+        "imGui"
     }
 
     pchheader "precompiled.h"
