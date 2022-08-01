@@ -9,3 +9,5 @@ sandbox/sandbox.vcxproj
 sandbox/sandbox.vcxproj.user
 **/bin/**
 **/bin_int/**
+*.vcxproj
+sandbox/imgui.ini

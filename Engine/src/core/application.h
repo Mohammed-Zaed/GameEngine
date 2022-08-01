@@ -19,6 +19,10 @@ namespace Engine
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* overlay);
 
+		inline const Window& getWindow() const { return *m_window;}
+		inline static Application& getInstance() { return *m_instance; }
+
+
 	private:
 		bool Application::onWindowClose(WindowCloseEvent& event);
 
@@ -26,6 +30,8 @@ namespace Engine
 		bool m_running = true;
 
 		LayerStack m_layerStack;
+
+		static Application* m_instance;
 	};
 
 	//To be defined by client

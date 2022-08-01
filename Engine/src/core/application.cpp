@@ -8,8 +8,11 @@
 
 namespace Engine
 {
+	Application* Application::m_instance = nullptr;
+
 	Application::Application()
 	{
+		m_instance = this;
 		m_window = std::unique_ptr<Window>(Window::create());
 		m_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
 	}
@@ -55,11 +58,13 @@ namespace Engine
 	void Application::pushLayer(Layer* layer)
 	{
 		m_layerStack.pushLayer(layer);
+		layer->onAttach();
 	}
 
 	void Application::pushOverlay(Layer* overlay)
 	{
 		m_layerStack.pushOverlay(overlay);
+		overlay->onAttach();
 	}
 
 	bool Application::onWindowClose(WindowCloseEvent& event)
