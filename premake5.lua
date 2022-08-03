@@ -31,6 +31,7 @@ project "Engine"
     location "Engine"
     kind "SharedLib"
     language "C++"
+	staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
@@ -69,7 +70,6 @@ project "Engine"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "on"
         systemversion "latest"
 
         defines
@@ -88,23 +88,24 @@ project "Engine"
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
         symbols "On"
-        buildoptions "/MDd"
+        runtime "Debug"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
         optimize "On"
-        buildoptions "/MD"
+        runtime "Release"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
         optimize "On"
-        buildoptions "/MD"
+        runtime "Release"
 
 
 project "sandbox"
     location "sandbox"
     kind "ConsoleApp"
     language "C++"
+	staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
@@ -125,7 +126,6 @@ project "sandbox"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "on"
         systemversion "latest"
 
         defines
@@ -141,14 +141,14 @@ project "sandbox"
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
         symbols "On"
-        buildoptions "/MDd"
+		runtime "Debug"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
         optimize "On"
-        buildoptions "/MD"
+        runtime "Release"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
         optimize "On"
-        buildoptions "/MD"
+        runtime "Release"
