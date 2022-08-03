@@ -14,13 +14,13 @@ namespace Engine
 
 		}
 
-		inline float getx() const { return m_x; }
-		inline float gety() const { return m_y; }
+		inline float getX() const { return m_x; }
+		inline float getY() const { return m_y; }
 
 		virtual std::string toString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseMovedEvent : " << getx() << ", " << gety();
+			ss << "MouseMovedEvent : " << getX() << ", " << getY();
 			return ss.str();
 		}
 

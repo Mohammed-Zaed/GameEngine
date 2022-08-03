@@ -91,7 +91,7 @@ namespace Engine {
 
 				case GLFW_RELEASE:
 				{
-					keyReleaseEvent event(key);
+					KeyReleasedEvent event(key);
 					data.m_eventCallback(event);
 				}
 				break;
