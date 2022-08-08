@@ -40,6 +40,7 @@ namespace Engine {
 		virtual void setEventCallback(const eventCallbackFn& callback) = 0;
 		virtual void setVSync(bool enabled) = 0;
 		virtual bool isVSync() const = 0;
+		virtual void* getNativeWindow() const = 0;
 
 		static Window* create(const WindowsConfiguration& config = WindowsConfiguration());
 	};
