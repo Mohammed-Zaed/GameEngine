@@ -14,11 +14,12 @@ outputdir ="%{cfg.build}_%{cfg.system}_%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 includedirpath              = {}
-includedirpath["src"]       = "%{prj.name}/src"
-includedirpath["spdlog"]    = "%{prj.name}/external/spdlog/include"
-includedirpath["GLFW"]      = "%{prj.name}/external/glfw/include"
-includedirpath["GLAD"]      = "%{prj.name}/external/glad/include"
-includedirpath["IMGUI"]     = "%{prj.name}/external/imgui"
+includedirpath["src"]       = "Engine/src"
+includedirpath["spdlog"]    = "Engine/external/spdlog/include"
+includedirpath["GLFW"]      = "Engine/external/glfw/include"
+includedirpath["GLAD"]      = "Engine/external/glad/include"
+includedirpath["IMGUI"]     = "Engine/external/imgui"
+includedirpath["GLM"]       = "Engine/external/glm"
 
 -- library directories relative to root folder (solution directory)
 librarydirpath              = {}
@@ -39,7 +40,7 @@ project "Engine"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/src/**.cpp"
     }
 
     includedirs
@@ -48,7 +49,8 @@ project "Engine"
         "%{includedirpath.spdlog}",
         "%{includedirpath.GLFW}",
         "%{includedirpath.GLAD}",
-        "%{includedirpath.IMGUI}"
+        "%{includedirpath.IMGUI}",
+		"%{includedirpath.GLM}"
     }
 
 
@@ -118,8 +120,9 @@ project "sandbox"
 
     includedirs
     {
-        "Engine/external/spdlog/include",
-        "Engine/src"
+        "Engine/src",
+		"%{includedirpath.spdlog}",
+		"%{includedirpath.GLM}"
     }
 
 
