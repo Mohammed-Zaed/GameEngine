@@ -4,8 +4,9 @@
 namespace Engine
 {
 	LayerStack::LayerStack()
+		:m_layerInsertIndex(0U)
 	{
-		m_layerIt = m_layers.begin();
+
 	}
 
 	LayerStack::~LayerStack()
@@ -18,12 +19,15 @@ namespace Engine
 
 	void LayerStack::pushLayer(Layer* layer)
 	{
-		m_layerIt = m_layers.emplace(m_layerIt, layer);
+		m_layers.emplace(m_layers.begin() + m_layerInsertIndex, layer);
+		layer->onAttach();
+		m_layerInsertIndex++;
 	}
 
 	void LayerStack::pushOverlay(Layer* overlay)
 	{
 		m_layers.emplace_back(overlay);
+		overlay->onAttach();
 	}
 
 	void LayerStack::popLayer(Layer* layer)
@@ -33,7 +37,7 @@ namespace Engine
 		if (it != m_layers.end())
 		{
 			m_layers.erase(it);
-			m_layerIt--;
+			m_layerInsertIndex--;
 		}
 	}
 

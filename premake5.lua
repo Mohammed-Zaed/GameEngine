@@ -30,12 +30,18 @@ include "Engine/external/imgui"
 
 project "Engine"
     location "Engine"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
+	
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
 
     files
     {
@@ -89,17 +95,17 @@ project "Engine"
 
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
-        symbols "On"
+        symbols "on"
         runtime "Debug"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
-        optimize "On"
+        optimize "on"
         runtime "Release"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
-        optimize "On"
+        optimize "on"
         runtime "Release"
 
 
@@ -107,7 +113,8 @@ project "sandbox"
     location "sandbox"
     kind "ConsoleApp"
     language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin_int/" .. outputdir .. "/%{prj.name}")
@@ -143,15 +150,15 @@ project "sandbox"
 
     filter "configurations:Debug"
         defines "ENGINE_DEBUG"
-        symbols "On"
+        symbols "on"
 		runtime "Debug"
 
     filter "configurations:Release"
         defines "ENGINE_RELEASE"
-        optimize "On"
+        optimize "on"
         runtime "Release"
 
     filter "configurations:Dist"
         defines "ENGINE_DIST"
-        optimize "On"
+        optimize "on"
         runtime "Release"

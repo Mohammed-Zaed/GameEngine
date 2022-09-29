@@ -5,6 +5,7 @@
 #include "core/log.h"
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
+#include "imgui/imguilayer.h"
 
 namespace Engine
 {
@@ -15,6 +16,9 @@ namespace Engine
 		m_instance = this;
 		m_window = std::unique_ptr<Window>(Window::create());
 		m_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
+
+		m_imGuiLayer = new ImGuiLayer();
+		pushOverlay(m_imGuiLayer);
 	}
 
 	Application::~Application()
@@ -33,6 +37,11 @@ namespace Engine
 
 			for (Layer* layer : m_layerStack)
 				layer->onUpdate();
+
+			m_imGuiLayer->begin();
+			for (Layer* layer : m_layerStack)
+				layer->onImGuiRender();
+			m_imGuiLayer->end();
 
 			m_window->onUpdate();
 
@@ -58,13 +67,11 @@ namespace Engine
 	void Application::pushLayer(Layer* layer)
 	{
 		m_layerStack.pushLayer(layer);
-		layer->onAttach();
 	}
 
 	void Application::pushOverlay(Layer* overlay)
 	{
 		m_layerStack.pushOverlay(overlay);
-		overlay->onAttach();
 	}
 
 	bool Application::onWindowClose(WindowCloseEvent& event)

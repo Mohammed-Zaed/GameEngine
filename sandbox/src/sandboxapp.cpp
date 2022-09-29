@@ -34,6 +34,13 @@ public:
 
 	}
 
+	virtual void onImGuiRender() override
+	{
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello World");
+		//ImGui::End();
+	}
+
 	virtual void onEvent(Engine::Event& event) override
 	{
 		if (event.getType() == Engine::EventType::KEY_PRESS_EVENT)
@@ -54,7 +61,6 @@ public:
 	Sandbox()
 	{
 		pushLayer(new ExampleLayer());
-		pushOverlay(new Engine::ImGuiLayer());
 	}
 
 	~Sandbox()
