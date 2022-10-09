@@ -6,6 +6,8 @@
 
 namespace Engine {
 
+	class GraphicsContext;
+
 	class WindowsWindow : public Window
 	{
 	public:
@@ -28,6 +30,7 @@ namespace Engine {
 		virtual void shutdown();
 	private:
 		GLFWwindow* m_window;
+		GraphicsContext* m_context;
 
 		struct WindowData
 		{

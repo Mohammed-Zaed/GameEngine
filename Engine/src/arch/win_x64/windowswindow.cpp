@@ -5,6 +5,7 @@
 #include "events/key_event.h"
 #include "events/mouse_event.h"
 
+#include "platform/opengl/opengl_context.h"
 #include "glad/glad.h"
 
 namespace Engine {
@@ -51,7 +52,9 @@ namespace Engine {
 		}
 
 		m_window = glfwCreateWindow((int)config.m_width, (int)config.m_height, m_data.m_title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_window);
+		m_context = new OpenglContext(m_window);
+		m_context->init();
+
 		glfwSetWindowUserPointer(m_window, &m_data);
 		setVSync(true);
 
@@ -156,7 +159,7 @@ namespace Engine {
 	void WindowsWindow::onUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_window);
+		m_context->swapBuffers();
 	}
 
 	void WindowsWindow::setVSync(bool enabled)
