@@ -25,8 +25,12 @@ includedirpath["GLM"]       = "Engine/external/glm"
 librarydirpath              = {}
 librarydirpath["GLFW"]      = "%{prj.name}/external/glfw/lib-vc2019/"
 
-include "Engine/external/glad"
-include "Engine/external/imgui"
+
+group "Dependencies"
+	include "Engine/external/glad"
+	include "Engine/external/imgui"
+
+group ""
 
 project "Engine"
     location "Engine"

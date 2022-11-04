@@ -4,6 +4,7 @@
 #include "events/app_event.h"
 #include "core/layerstack.h"
 #include "imgui/imguilayer.h"
+#include "renderer/shader.h"
 
 namespace Engine
 {
@@ -26,6 +27,7 @@ namespace Engine
 
 	private:
 		unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
+		std::unique_ptr<Shader> m_shader;
 		bool Application::onWindowClose(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;
