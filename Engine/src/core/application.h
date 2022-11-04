@@ -25,6 +25,7 @@ namespace Engine
 
 
 	private:
+		unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
 		bool Application::onWindowClose(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;
