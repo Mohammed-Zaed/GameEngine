@@ -5,6 +5,7 @@
 #include "core/layerstack.h"
 #include "imgui/imguilayer.h"
 #include "renderer/shader.h"
+#include "renderer/buffer.h"
 
 namespace Engine
 {
@@ -26,8 +27,10 @@ namespace Engine
 
 
 	private:
-		unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
+		unsigned int m_vertexArray;
 		std::unique_ptr<Shader> m_shader;
+		std::unique_ptr<VertexBuffer> m_vertexBuffer;
+		std::unique_ptr<IndexBuffer> m_indexBuffer;
 		bool Application::onWindowClose(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;
