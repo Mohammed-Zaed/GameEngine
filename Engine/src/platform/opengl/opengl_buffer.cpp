@@ -27,6 +27,7 @@ Engine::OpenglVertexBuffer::~OpenglVertexBuffer()
 
 
 Engine::OpenglIndexBuffer::OpenglIndexBuffer(uint32_t* indices, uint32_t count)
+	:m_count(count)
 {
 	glCreateBuffers(1, &m_rendererId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererId);

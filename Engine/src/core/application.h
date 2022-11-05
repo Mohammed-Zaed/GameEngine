@@ -6,6 +6,7 @@
 #include "imgui/imguilayer.h"
 #include "renderer/shader.h"
 #include "renderer/buffer.h"
+#include "renderer/vertex_array.h"
 
 namespace Engine
 {
@@ -27,10 +28,10 @@ namespace Engine
 
 
 	private:
-		unsigned int m_vertexArray;
-		std::unique_ptr<Shader> m_shader;
-		std::unique_ptr<VertexBuffer> m_vertexBuffer;
-		std::unique_ptr<IndexBuffer> m_indexBuffer;
+		std::shared_ptr<Shader> m_shader;
+		std::shared_ptr<VertexArray> m_vertexArray;
+		std::shared_ptr<Shader> m_blueShader;
+		std::shared_ptr<VertexArray> m_squareVA;
 		bool Application::onWindowClose(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;

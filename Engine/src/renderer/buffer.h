@@ -78,7 +78,7 @@ namespace Engine {
 		}
 
 		inline uint32_t GetStride() const { return m_stride; }
-		inline const std::vector<BufferElement>& GetElements() const { return m_elements; }
+		inline const std::vector<BufferElement>& getElements() const { return m_elements; }
 
 		std::vector<BufferElement>::iterator begin() { return m_elements.begin(); }
 		std::vector<BufferElement>::iterator end() { return m_elements.end(); }
@@ -123,6 +123,8 @@ namespace Engine {
 
 		virtual void bind() const = 0;
 		virtual void unBind() const = 0;
+
+		virtual uint32_t getCount() const = 0;
 
 		static IndexBuffer* create(uint32_t* indices, uint32_t count);
 	};
